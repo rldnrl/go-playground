@@ -40,4 +40,36 @@ func main() {
     fmt.Println("i =", i)
   }
 
+  // Map
+	myMap := map[string]int8{
+		"Google": 1,
+		"Apple":  2,
+		"Meta":   3,
+	}
+
+	fmt.Println(myMap)
+
+	for key, value := range myMap {
+		fmt.Println(key, "-", value)
+	}
+
+	// Pointer
+	name := "netninja"
+
+	// updateName(name)
+
+	fmt.Println("memory address of name is", &name)
+
+	m := &name
+	fmt.Println("memory address:", m)
+	fmt.Println("value at memory address:", *m)
+
+	updateName(m)
+	fmt.Println(name)
+
+	// Struct Custom Types
+	myBill := newBill("mario's bill")
+	fmt.Println(myBill)
+
+	fmt.Println(myBill.format())
 }
