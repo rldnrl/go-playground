@@ -1,46 +1,78 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func updateName(x *string) {
+	*x = "David"
+}
+
+func createBill() bill {
+	reader := bufio.NewReader(os.Stdin)
+
+	// fmt.Print("Create new bill name: ")
+	// name, _ := reader.ReadString('\n')
+	// name = strings.TrimSpace(name)
+	name, _ := getInput("Create new bill name: ", reader)
+
+	b := newBill(name)
+	fmt.Println("Created the bill - ", b.name)
+
+	return b
+}
+
+func promptOptions(b bill) {
+	reader := bufio.NewReader(os.Stdin)
+
+	opt, _ := getInput("Choose option (a - add, s - save bill, t - add tip): ", reader)
+
+	fmt.Println(opt)
+}
+
+func getInput(prompt string, reader *bufio.Reader) (string, error) {
+	fmt.Print(prompt)
+	input, error := reader.ReadString('\n')
+
+	return strings.TrimSpace(input), error
+}
 
 func main() {
-  // var language string = "typescript"
-  // var language = "typescript"
-  language := "typescript"
-  fmt.Println(language)
 
-  var age int8 = 25
-  fmt.Println(age)
+	// var firstName = "David"
+	// var age uint8 = 255
+	firstName := "David"
+	age := 27
 
-  var price float32 = 3.25
-  fmt.Println(price)
+	fmt.Printf("First Name is %v", firstName)
+	fmt.Printf("Age is %v\n", age)
 
-  // number array
-  numbers := []int{10, 11, 12, 13, 14, 15}
-  fmt.Println(numbers)
+	// var i = 0
+	// for i < 5 {
+	// 	fmt.Println("i is", i)
+	// 	i++
+	// }
 
-  // string array
-  lang := []string{"ts", "js", "go", "c", "cpp", "java"}
-  fmt.Println(lang)
+	// for i := 0; i < 5; i++ {
+	// 	fmt.Println("i is", i)
+	// }
 
-  // array append
-  numbers = append(numbers, 30)
-  lang = append(lang, "md")
+	arrayOfNumber := []int16{100, 200, 300, 400, 500, 600}
 
-  fmt.Println(numbers)
-  fmt.Println(lang)
+	for i, v := range arrayOfNumber {
+		fmt.Println(i, "-", v)
+	}
 
-  // for loop
-  // i := 0
-  // for i < 5 {
-  //   fmt.Println("i =", i)
-  //   i++
-  // }
+	array := []string{"David", "Jay", "Chiho"}
 
-  for i := 0; i < 5; i++ {
-    fmt.Println("i =", i)
-  }
+	for i, v := range array {
+		fmt.Println(i, "-", v)
+	}
 
-  // Map
+	// Map
 	myMap := map[string]int8{
 		"Google": 1,
 		"Apple":  2,
@@ -71,5 +103,18 @@ func main() {
 	myBill := newBill("mario's bill")
 	fmt.Println(myBill)
 
+	// add item
+	myBill.addItem("onion soup", 4.50)
+	myBill.addItem("veg pie", 8.95)
+	myBill.addItem("coffee pudding", 4.95)
+	myBill.addItem("coffee", 3.25)
+
+	// update tip
+	myBill.updateTip(10)
+
 	fmt.Println(myBill.format())
+
+	// User Input
+	myBill2 := createBill()
+	promptOptions(myBill2)
 }
