@@ -66,7 +66,7 @@ func main() {
 		fmt.Println(i, "-", v)
 	}
 
-	array := []string{"David", "Jay", "Chiho"}
+	array := []string{"JavaScript", "Python", "C++"}
 
 	for i, v := range array {
 		fmt.Println(i, "-", v)
